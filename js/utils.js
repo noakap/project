@@ -60,8 +60,8 @@ function getRandomNum(max, min) {
 
 function SetTime() {
     var elTime = document.querySelector('.time span');
-    elTime.innerText = gSecCounter;
-    gSecCounter++;
+    elTime.innerText = gGame.secsPassed;
+    gGame.secsPassed++;
 }
 
 function printMat(mat, selector) {
