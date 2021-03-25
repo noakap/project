@@ -4,7 +4,7 @@ var gBoard = [];
 var idInterval = 0;
 
 const MINE = '💣';
-const FLAG = '🏳';
+const FLAG = '🚩';
 const LIVE = '❤';
 const GAME_START = '😃';
 const STEPPED_ON_MINE = '👎';
@@ -88,15 +88,10 @@ function createCell() {
 }
 
 function setMinesOnBoard(boardSize, board) {
-    var minesNum = 2;
-    if (boardSize === 8) minesNum = 12;
-    if (boardSize === 12) minesNum = 30;
-
     var i = getRandomNum(boardSize, 0);
     var j = getRandomNum(boardSize, 0);
     var cell = board[i][j];
-
-    for (var counter = 0; counter < minesNum; counter++) {
+    for (var counter = 0; counter < gLevel.mine; counter++) {
         while (cell.isMine) {
             i = getRandomNum(boardSize, 0);
             j = getRandomNum(boardSize, 0);
@@ -127,26 +122,14 @@ function cellClicked(elCell, ev) {
 
     if (cell.isMine && !gGame.isOn) return initGame();
     if (!gGame.isOn) idInterval = setInterval(SetTime, 1000);
+
     gGame.isOn = true;
-    if (gGame.lastMove === cellIndex && !cell.isMarked) return;
     if (gGame.hintMood) return shownNeighborsForSec(cellIndex);
-    if (ev.button === RIGHT_CLICK) {
-        toggleFlag(cell, elCell);
-    } else if (cell.isMarked) {
-        return;
-    } else if (cell.mineAroundCount === 0) {
-        recursiveExpandShown(cellIndex);
-    } else if (cell.isMine) {
-        if (gGame.livesCount) --gGame.livesCount;
-        var elLives = document.querySelector('h2 span');
-        elLives.innerText = (!gGame.livesCount) ? '0' : LIVE.repeat(gGame.livesCount);
-        document.querySelector('.smiley').innerText = STEPPED_ON_MINE;
-        elCell.innerText = cell.mineAroundCount;
-    } else {
-        document.querySelector('.smiley').innerText = GAME_START;
-        elCell.innerText = cell.mineAroundCount;
-        cell.isMarked = false;
-    }
+    if (ev.button === RIGHT_CLICK) return toggleFlag(cell, elCell);
+    else if (cell.isMarked) return;
+    else if (!cell.mineAroundCount) recursiveExpandShown(cellIndex);
+    else if (cell.isMine) upDateLives(elCell, cell);
+    else renderCell(elCell, cell);
 
     gGame.lastMove = cellIndex;
     cell.isShown = true;
@@ -203,16 +186,32 @@ function revealedAllMines() {
     renderCells(mines);
 }
 
+function upDateLives(elCell, cell) {
+    if (gGame.livesCount) --gGame.livesCount;
+    var elLives = document.querySelector('h2 span');
+    elLives.innerText = (!gGame.livesCount) ? '0' : LIVE.repeat(gGame.livesCount);
+    document.querySelector('.smiley').innerText = STEPPED_ON_MINE;
+    elCell.innerText = cell.mineAroundCount;
+}
+
+function renderCell(elCell, cell) {
+    document.querySelector('.smiley').innerText = GAME_START;
+    elCell.innerText = cell.mineAroundCount;
+}
+
 function toggleFlag(cell, elCell) {
     if (cell.isMarked) {
         cell.isMarked = false;
+        cell.isShown = false;
         elCell.innerText = '';
         elCell.classList.remove('flag');
     } else {
         cell.isMarked = true;
+        cell.isShown = true;
         elCell.innerText = FLAG;
         elCell.classList.add('flag');
     }
+    upDateCounts();
 }
 
 function getHint() {
@@ -226,7 +225,7 @@ function shownNeighborsForSec(cellIndex) {
     var neighbors = findNeighbors(cellIndex.i, cellIndex.j);
     renderCells(neighbors);
     var neighborsWithZero = findNeighborsWithCountMineZero(cellIndex.i, cellIndex.j);
-    for (var i = 0; i < neighborsWithZero.length; i++){
+    for (var i = 0; i < neighborsWithZero.length; i++) {
         renderCellsWithZeroMine(neighborsWithZero[i]);
     }
     setTimeout(unShownNeighbors, 1000, neighbors, neighborsWithZero);
@@ -238,7 +237,7 @@ function unShownNeighbors(cells, zeroCells) {
         var elCell = document.querySelector(`#cell-${cells[i].i}-${cells[i].j}`);
         elCell.innerText = '';
     }
-    for (var i = 0; i < zeroCells.length; i++){
+    for (var i = 0; i < zeroCells.length; i++) {
         var elCell = document.querySelector(`#cell-${zeroCells[i].i}-${zeroCells[i].j}`);
         elCell.style.backgroundColor = 'rgb(250, 250, 250)';
     }
@@ -298,7 +297,6 @@ function safeClicks(elBtn) {
     elCell.innerText = gBoard[safeCell.i][safeCell.j].mineAroundCount;
 
     setTimeout(unShownsafeClick, 1000, elCell);
-
     if (gGame.safeClicksNum === 0) {
         elBtn.style.visibility = 'hidden';
         elMsgSpan.style.visibility = 'hidden';

@@ -9,23 +9,23 @@
     <link rel="stylesheet" href="css/app.css">
 </head>
 
-<body onload="initGame()" >
+<body onload="initGame()">
     <h2 class="smiley" onclick="initGame()"></h2>
-    <h2>Lives: <span></span>
-        <h2 class="time">Time: <span>0</span></h2>
-        <div class="board-container"></div>
-        <h2 class="hints" onclick="getHint()"></h2>
-        <h2 class="count-safe-click">You have more 3 clicks</h2>
-        <button class="safe-click" onclick="safeClicks(this)">Safe click</button>
-        <button class="undo" onclick="undo(this)">Undo</button>
-        <div class="level"> 
-            <button class="eazy-level" onclick="changeLevel(this)">Eazy</button>
-            <button class="hurd-level" onclick="changeLevel(this)">Hurd</button>
-            <button class="extereme-level" onclick="changeLevel(this)">Extereme</button>
-        </div>
+    <h2>Lives: <span></span></h2>
+    <h2 class="time">Time: <span>0</span></h2>
+    <div class="board-container"></div>
+    <h2 class="hints" onclick="getHint()"></h2>
+    <h2 class="count-safe-click">You have more 3 clicks</h2>
+    <button class="safe-click" onclick="safeClicks(this)">Safe click</button>
+    <button class="undo" onclick="undo(this)">Undo</button>
+    <div class="level">
+        <button class="eazy-level" onclick="changeLevel(this)">Eazy</button>
+        <button class="hurd-level" onclick="changeLevel(this)">Hurd</button>
+        <button class="extereme-level" onclick="changeLevel(this)">Extereme</button>
+    </div>
 
-        <script src="js/utils.js"></script>
-        <script src="js/game.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/game.js"></script>
 </body>
 
 </html>
