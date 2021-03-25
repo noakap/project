@@ -123,6 +123,7 @@ function cellClicked(elCell, ev) {
     const RIGHT_CLICK = 2;
     var cellIndex = getCellIndex(elCell.id);
     var cell = gBoard[cellIndex.i][cellIndex.j];
+    document.addEventListener('contextmenu', event => event.preventDefault());
 
     if (cell.isMine && !gGame.isOn) return initGame();
     if (!gGame.isOn) idInterval = setInterval(SetTime, 1000);
