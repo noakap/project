@@ -4,10 +4,10 @@ function findNeighborsWithCountMineZero(iIdx, jIdx) {
     var indx = -1;
     var neighborsWithCountZero = [];
     for (var i = iIdx - 1; i <= iIdx + 1; i++) {
-        if (i < 0 || i > gBoard.length - 1) continue
+        if (i < 0 || i > gBoard.length - 1) continue;
         for (var j = jIdx - 1; j <= jIdx + 1; j++) {
-            if (j < 0 || j > gBoard.length - 1) continue
-            if (i === iIdx && j === jIdx) continue
+            if (j < 0 || j > gBoard.length - 1) continue;
+            if (i === iIdx && j === jIdx) continue;
             var cell = gBoard[i][j];
             if (cell.mineAroundCount === 0 && !cell.isShown) {
                 indx = { i: i, j: j };
@@ -16,17 +16,17 @@ function findNeighborsWithCountMineZero(iIdx, jIdx) {
             }
         }
     }
-    return neighborsWithCountZero;;
+    return neighborsWithCountZero;
 }
 
 function findNeighbors(iIdx, jIdx) {
     var indx = -1;
-    var neighbors = []
+    var neighbors = [];
     for (var i = iIdx - 1; i <= iIdx + 1; i++) {
-        if (i < 0 || i > gBoard.length - 1) continue
+        if (i < 0 || i > gBoard.length - 1) continue;
         for (var j = jIdx - 1; j <= jIdx + 1; j++) {
-            if (j < 0 || j > gBoard.length - 1) continue
-            if (i === iIdx && j === jIdx) continue
+            if (j < 0 || j > gBoard.length - 1) continue;
+            if (i === iIdx && j === jIdx) continue;
             var cell = gBoard[i][j];
             if (cell.mineAroundCount > 0 && !cell.isShown
                 || cell.mineAroundCount === MINE) {
@@ -87,7 +87,7 @@ function renderBoard(mat, selector) {
 }
 
 function getCellIndex(strCellId) {
-    var parts = strCellId.split('-')
+    var parts = strCellId.split('-');
     var index = { i: +parts[1], j: +parts[2] };
     return index;
 }
