@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mine Sweeper</title>
+    <link rel="stylesheet" href="css/app.css">
+</head>
+
+<body onload="initGame()">
+    <h2 class="smiley" onclick="initGame()"></h2>
+    <h2>Lives: <span></span>
+        <h2 class="time">Time: <span>0</span></h2>
+        <div class="board-container"></div>
+        <h2 class="hints" onclick="getHint()"></h2>
+        <button class="safe-click" onclick="safeClicks(this)">Safe click</button>
+        <div class="level"> 
+            <button class="eazy-level" onclick="changeLevel(this)">Eazy</button>
+            <button class="hurd-level" onclick="changeLevel(this)">Hurd</button>
+            <button class="extereme-level" onclick="changeLevel(this)">Extereme</button>
+        </div>
+
+        <script src="js/utils.js"></script>
+        <script src="js/game.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,112 @@
+body {
+    background-color: white;
+    text-align: center;
+    color:black;
+}
+
+table{
+    margin: auto;
+    border:1px solid black;
+}
+  
+.cell {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    font-size: 1.5em;
+    border: solid 1px black;
+}
+
+.smiley{
+    padding-top: 25px;;
+}
+
+button{
+    display: block;
+    background-color: white; 
+    font-size: 18px;
+    cursor: pointer;
+    color: black; 
+    transition-duration: 0.4s;
+    border: 2px solid #4CAF50;
+    border-radius: 15%;
+}
+  
+button:hover {
+    background-color: #4CAF50;
+    color: rgb(180, 223, 193);
+}
+
+.level{
+    text-align: center;
+    margin: auto;
+    width: 325px;
+    height: 20px;
+}
+
+.level button{
+    display:inline-block;
+    text-align: center;
+    cursor: pointer;
+    background-color: white; 
+    padding: auto;
+    font-size: 17px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.hints{
+    height: 40px;
+    margin-top: 10px;
+    padding: auto;
+    font-size: 30px;
+}
+
+.safe-click {
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    background-color: white; 
+    font-size: 17px;
+    margin-bottom: 20px;
+    border: 2px solid gold;
+    border-radius: 15%;
+}
+
+.safe-click:hover {
+    background-color: white;
+    color: rgb(194, 177, 83);
+    border: 2px solid gold;
+}
+
+.mines-count1{
+    color: blue;
+}
+
+.mines-count2{
+    color: green;
+}
+
+.mines-count3{
+    color: rgb(204, 35, 44);
+}
+
+.mines-count4{
+    color: rgb(29, 179, 216);
+}
+
+.mines-count5{
+    color: pink;
+}
+
+.mines-count6{
+    color: yellow;
+}
+
+.mines-count7{
+    color: brown;
+}
+
+.mines-count6{
+    color: gray;
+}
